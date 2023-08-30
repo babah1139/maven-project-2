@@ -1,5 +1,4 @@
-FROM tomcat:9-jdk21-openjdk
-WORKDIR /usr/local/tomcat/webapp
+FROM tomee:jre17-Semeru
+WORKDIR /usr/local/tomee/webapps/
 COPY /webapp/target/webapp.war .
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+
