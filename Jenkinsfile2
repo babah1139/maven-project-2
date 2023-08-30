@@ -11,10 +11,10 @@ pipeline {
     } 
 
     stages {
-        stage('Build') {
+        stage('Code Scan') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/Raymond-Tanwie/maven-project-2.git'
+               // git 'https://github.com/Raymond-Tanwie/maven-project-2.git'
                 sh "mvn clean verify sonar:sonar \
                   -Dsonar.projectKey=primus \
                   -Dsonar.host.url=http://3.80.71.36:9000 \
@@ -28,9 +28,9 @@ pipeline {
             }
 
         }
-        stage('Status'){
+        stage('Build'){
           steps {
-              echo 'success'
+              sh "mvn -Dmaven.test.failure.ignore=true package"
           }
         }
         stage ('Deploy to Tomcat') {
