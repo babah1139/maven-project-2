@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Maven"
+    }
+    
+    triggers {
+      pollSCM '* * * * *'
+    } 
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/Raymond-Tanwie/maven-project-2.git'
+
+                // Run Maven on a Unix agent.
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+                // To run Maven on a Windows agent, use
+                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+
+        }
+        stage('Status'){
+          steps {
+              echo 'success'
+          }
+        }
+        stage ('Deploy to Tomcat') {
+           steps {
+            script {
+          deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://54.147.30.209:8080/')], contextPath: '/pipeline', onFailure: false, war: 'webapp/target/*.war' 
+         }
+       }
+     }
+    }
+    
+}
