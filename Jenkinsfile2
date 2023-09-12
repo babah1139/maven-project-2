@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Code Scan') {
              when {
-               expression { BRANCH_NAME == 'workflow'
+               expression { BRANCH_NAME == 'master'
            }
              }
             steps {
