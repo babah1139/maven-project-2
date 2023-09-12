@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Code Scan') {
              when {
-               branch 'workflow'
+               expression { BRANCH_NAME == 'workflow'
            }
             steps {
                 // Get some code from a GitHub repository
@@ -51,4 +51,6 @@ pipeline {
      }
     }
     
+}
+  
 }
