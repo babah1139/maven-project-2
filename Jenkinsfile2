@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    tools {
+  tools {
   maven 'Maven'
 }
     
@@ -9,6 +9,9 @@ pipeline {
       pollSCM '* * * * *'
     } 
 
+  environment {
+       NEW_VERSION = "1.2.3"
+ }
     stages {
         stage('Code Scan') {
              when {
@@ -33,6 +36,7 @@ pipeline {
         stage('Build'){
           steps {
               sh "mvn -Dmaven.test.failure.ignore=true package"
+              echo "this is a new version ${NEW_VERSION}"
           }
         }
         stage ('Deploy to Tomcat') {
