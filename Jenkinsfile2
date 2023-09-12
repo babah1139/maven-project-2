@@ -12,9 +12,9 @@ pipeline {
 
     stages {
         stage('Code Scan') {
-            when {
-               branch 'workflow'
-            }
+            # when {
+              # branch 'workflow'
+           # }
             steps {
                 // Get some code from a GitHub repository
                // git 'https://github.com/Raymond-Tanwie/maven-project-2.git'
