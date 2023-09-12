@@ -12,6 +12,9 @@ pipeline {
 
     stages {
         stage('Code Scan') {
+            when {
+               branch 'workflow'
+            }
             steps {
                 // Get some code from a GitHub repository
                // git 'https://github.com/Raymond-Tanwie/maven-project-2.git'
@@ -34,6 +37,9 @@ pipeline {
           }
         }
         stage ('Deploy to Tomcat') {
+          when {
+             branch 'workflow'
+            }
            steps {
             script {
           deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://54.147.30.209:8080/')], contextPath: '/primus-app', onFailure: false, war: 'webapp/target/*.war' 
