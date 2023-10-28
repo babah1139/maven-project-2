@@ -1,4 +1,4 @@
-FROM tomme 
+FROM tomee 
 
 WORKDIR /usr/local/tomee/webapps/
 
