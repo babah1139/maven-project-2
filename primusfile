@@ -3,7 +3,9 @@ pipeline {
     agent {
         label 'slave01'
         }
-        
+    triggers {
+          pollSCM '1 * * * *'
+    }
     tools {
         maven 'Maven-3.9.9'
         git 'Default'
